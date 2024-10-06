@@ -5,10 +5,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use App\Jobs\LongRunningScriptJob;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +23,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     if (\Auth::user()) {
-        return redirect('dashboard');
+        return redirect('questions.index');
     }
     return Inertia::render('Auth/Login', [
     // return Inertia::render('Welcome', [
@@ -32,6 +33,14 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('run-script', function () {
+    ini_set('max_execution_time', -1);
+    LongRunningScriptJob::dispatch();
+
+    // Respond to the frontend with a success message
+    return response()->json(['message' => 'Script is running in the background!'], 200);
+})->name('run-script');
 
 Route::get('/dashboard', function () {
     $user = \Auth::user();
@@ -48,6 +57,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('category', CategoryController::class);
     Route::post('category-upload/{id}', [CategoryController::class, 'updates'])->name('category-upload');
     Route::resource('exams', ExamController::class);
+    Route::resource('questions', QuestionController::class);
+    
+    
     // Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
     
 });

@@ -26,12 +26,13 @@ const AppMenu = () => {
                 {
                     label: 'Home',
                     items: [
-                        { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: route('dashboard') },
-                        { label: 'Button', icon: 'pi pi-fw pi-id-card', to: route('button') },
-                        { label: 'User', icon: 'pi pi-fw pi-users', to: route('users.index') },
-                        { label: 'Role', icon: 'pi pi-fw pi-users', to: route('roles.index') },
-                        { label: 'Exam', icon: 'pi pi-fw pi-users', to: route('exams.index') },
-                        { label: 'Category', icon: 'pi pi-fw pi-users', to: route('category.index') },
+                        // { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: route('dashboard') },
+                        // { label: 'Button', icon: 'pi pi-fw pi-id-card', to: route('button') },
+                        // { label: 'User', icon: 'pi pi-fw pi-users', to: route('users.index') },
+                        // { label: 'Role', icon: 'pi pi-fw pi-users', to: route('roles.index') },
+                        // { label: 'Exam', icon: 'pi pi-fw pi-users', to: route('exams.index') },
+                        // { label: 'Category', icon: 'pi pi-fw pi-users', to: route('category.index') },
+                        { label: 'Questions', icon: 'pi pi-fw pi-users', to: route('questions.index') },
                     ]
                 },
             ];

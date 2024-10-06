@@ -5,6 +5,7 @@ import React, {useContext, useEffect, useRef, useState} from 'react';
 import {LayoutContext} from '@/Layouts/layout/context/layoutcontext';
 import Layout from "@/Layouts/layout/layout.jsx";
 import DashboardInfoCard from "@/Components/DashboardInfoCard.jsx";
+import { useForm } from '@inertiajs/react';
 
 const lineData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -34,6 +35,8 @@ const Dashboard = ({user}) => {
     const menu2 = useRef(null);
     const [lineOptions, setLineOptions] = useState({});
     const {layoutConfig} = useContext(LayoutContext);
+
+    const {post,get} = useForm();
 
     const applyLightTheme = () => {
         const lineOptions = {
@@ -107,8 +110,13 @@ const Dashboard = ({user}) => {
         }
     }, [layoutConfig.colorScheme]);
 
+    const handleScript = ()=>{
+        get(route('run-script'));
+    }
+
     return (
         <Layout>
+            <button onClick={() => handleScript() } className="p-button p-button-danger">handleScript</button>
             <div className="grid">
                 <DashboardInfoCard title="Orders"
                                    value="152"
