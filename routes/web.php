@@ -6,6 +6,7 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\TripController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -58,6 +59,8 @@ Route::middleware('auth')->group(function () {
     Route::post('category-upload/{id}', [CategoryController::class, 'updates'])->name('category-upload');
     Route::resource('exams', ExamController::class);
     Route::resource('questions', QuestionController::class);
+    Route::resource('trip', TripController::class);
+    Route::get('scrape', [TripController::class,'scrape'])->name('scrape');
     
     
     // Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
